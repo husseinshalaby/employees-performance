@@ -5,13 +5,15 @@
   font-size: 14px;
 
   .c-users-list__header {
-    display: table-row;
-    font-size: 16px;
-    font-weight: 500;
+    display: flex;
+    font-size: 18px;
+    font-weight: bold;
+    justify-content: space-between;
+    padding: 10px;
     background-color: #e5e9f1;
+}
 
     > div {
-      display: table-cell;
       text-align: center;
       vertical-align: middle;
       font-size: 14px;
@@ -40,4 +42,35 @@
     display: flex;
     align-items: center;
   }
+
+  .c-users-list__hightlighted {
+    background-color: yellow;
+  }
+
+.c-users-list__search-container {
+  display: flex;
+}
+
+.c-users-list__search-input {
+  color:#8a8a8a;
+	display: block;
+	width: 90%;
+	height: 44px;
+	padding: 5px 5%;
+  border:1px solid #ccc;
+  border-radius: 9px;
+}
+
+.c-users-list__button {
+  background-color:#55b1df;
+  padding: 6px 20px;
+  border-radius: 9px;
+  margin-left: 10px;
+  color: #fff;
+  border: 1px solid;
+}
+
+.c-users-list__button:hover {
+  background: #fff;
+  color:#55b1df;
 }
