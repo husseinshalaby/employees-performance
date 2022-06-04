@@ -16,18 +16,34 @@ function homePageController(Employees, $scope, $location, $rootScope) {
   this.handleSortEvent = function (list) {
     $rootScope.searchText = '';
     $rootScope.users = list;
-    console.log('$rootScope.users', $rootScope.users);
+  };
+
+  this.handleGetMoreEmployees = function (number) {
+    getMoreEmployees(number);
   };
 
   const homePageVm = this;
   homePageVm.employees = [];
   activate();
 
+  function getMoreEmployees(number) {
+    $rootScope.loading = true;
+    setTimeout(()=>{
+      Employees.loadMoreEmployees(number)
+        .then(({ data }) => {
+          $rootScope.users = data.employees;
+          $rootScope.loading = false;
+        })
+    }, 50);
+  }
+
   function activate() {
     Employees.getEmployees()
       .then(({ data }) => {
         homePageVm.employees = homePageVm.employees.concat(data.employees);
+        homePageVm.pages = +data.pages;
         $location.url($location.path());
+        $rootScope.loading = false;
       });
   }
 }
