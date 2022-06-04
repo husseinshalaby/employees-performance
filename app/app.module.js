@@ -4,6 +4,7 @@ import 'ngVue/build/plugins.js';
 import PerformancePageComponent from './pages/performance-page.vue';
 import PerformanceChartComponent from './components/vue-components/performance-chart.vue';
 import SearchComponent from './components/vue-components/search.vue';
+import ButtonComponent from './components/vue-components/button.vue';
 
 angular.module('appModule', [
   'ui.router',
@@ -21,4 +22,8 @@ angular.module('appModule').directive('vPerformanceChart', (createVueComponent) 
 
 angular.module('appModule').directive('searchComponent', (createVueComponent) => {
   return createVueComponent(Vue.component('SearchComponent', SearchComponent));
+});
+
+angular.module('appModule').directive('buttonComponent', (createVueComponent) => {
+  return createVueComponent(Vue.component('ButtonComponent', ButtonComponent));
 });

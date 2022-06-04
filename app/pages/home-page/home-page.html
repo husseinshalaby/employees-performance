@@ -13,8 +13,12 @@
   >
   </employees-list>
   <div class="c-dashboard__footer">
-    <button class="c-button">
-      Load More
-    </button>
+    <div ng-controller="homeController as ctrl">
+      <button-component  
+      v-on-more="ctrl.handleGetMoreEmployees"
+      v-props-loading="$root.loading"
+      v-props-pages="homePageVm.pages"
+      />
+    </div>
   </div>
 </div>
