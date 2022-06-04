@@ -1,6 +1,9 @@
 <template>
   <div class="c-chart__container">
-    <v-chart ref="chart" :option="chartOptions"/>
+    <h1 v-if="loading">Loading...</h1>
+    <h1 v-else-if="!loading && error">{{error}}</h1>
+    <h1 v-else-if="!loading && chartData.length === 0 && !error">No Data</h1>
+    <v-chart ref="chart" :option="chartOptions" v-else/>
   </div>
 </template>
 
@@ -9,6 +12,7 @@ import moment from "moment";
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { LineChart } from "echarts/charts";
+import store from "../../store/index.js";
 import {
   TitleComponent,
   TooltipComponent,
@@ -16,6 +20,7 @@ import {
   VisualMapComponent
 } from "echarts/components";
 import VChart from "vue-echarts";
+
 use([
   CanvasRenderer,
   LineChart,
@@ -24,46 +29,30 @@ use([
   GridComponent,
   VisualMapComponent
 ]);
+
 export default {
   name: "PerformanceChartComponent",
   components: {
     VChart
   },
-  data() {
-    return {
-      chartData: [
-        {
-          date_ms: 1641772800000,
-          performance: 0.2
-        },
-        {
-          date_ms: 1641859200000,
-          performance: 0.33
-        },
-        {
-          date_ms: 1641945600000,
-          performance: 0.53
-        },
-        {
-          date_ms: 1642032000000,
-          performance: 0.31
-        },
-        {
-          date_ms: 1642118400000,
-          performance: 0.65
-        },
-        {
-          date_ms: 1642204800000,
-          performance: 0.88
-        },
-        {
-          date_ms: 1642291200000,
-          performance: 0.07
-        }
-      ]
-    };
+  mounted() {
+    this.getChartData();
   },
   computed: {
+    chartData() {
+      let data =
+        store.getters.getFilteredChartData.length > 0 ||
+        store.getters.getFiltered === true
+          ? store.getters.getFilteredChartData
+          : store.getters.getChartData;
+      return data;
+    },
+    loading() {
+      return store.getters.getLoading;
+    },
+    error() {
+      return store.getters.getError;
+    },
     initOptions() {
       return {
         width: "auto",
@@ -164,6 +153,9 @@ export default {
     }
   },
   methods: {
+    getChartData() {
+      store.dispatch("getChartData");
+    },
     formatDate(dateInMs) {
       return moment(dateInMs).format("DD MMM YYYY");
     }

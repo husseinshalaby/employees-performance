@@ -6,6 +6,7 @@ import PerformanceChartComponent from './components/vue-components/performance-c
 import SearchComponent from './components/vue-components/search.vue';
 import ButtonComponent from './components/vue-components/button.vue';
 import NotFoundPageComponent from './pages/not-found-page.vue';
+import DateFilterComponent from './components/vue-components/date-filter.vue';
 
 angular.module('appModule', [
   'ui.router',
@@ -31,4 +32,8 @@ angular.module('appModule').directive('buttonComponent', (createVueComponent) =>
 
 angular.module('appModule').directive('vNotFoundPage', (createVueComponent) => {
   return createVueComponent(Vue.component('NotFoundPageComponent', NotFoundPageComponent));
+});
+
+angular.module('appModule').directive('vDateFilter', (createVueComponent) => {
+  return createVueComponent(Vue.component('DateFilterComponent', DateFilterComponent));
 });

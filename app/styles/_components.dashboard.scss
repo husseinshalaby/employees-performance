@@ -1,16 +1,16 @@
 .top-links {
   text-align: center;
   padding: 16px 0;
-
+  font-size: 22px;
+  font-weight: bold;
   a {
     text-decoration: none;
-    color: #0099ff;
+    color: #55b1df;
     margin-left: 32px;
 
-    &.active {
-      color: black;
-      cursor: default;
-    }
+  }
+  :hover {
+    color: black;
   }
 }
 
