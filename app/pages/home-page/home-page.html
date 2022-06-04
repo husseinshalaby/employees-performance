@@ -1,10 +1,17 @@
-<div class="c-dashboard">
-  <div class="c-filters__container">
-    [Place search component here]
+<div class="c-dashboard" ng-app="vue.components">
+  <div class="c-filters__container" ng-controller="homeController as ctrl">
+    <search-component  
+    v-on-clear="ctrl.handleClearEvent" 
+    v-on-search="ctrl.handleSearchEvent"
+    v-on-sort="ctrl.handleSortEvent"
+    v-props-employees="homePageVm.employees"
+    />
   </div>
-
-  <employees-list employees-list="homePageVm.employees"></employees-list>
-
+  <employees-list 
+  employees-list="homePageVm.employees"
+  text="homePageVm.text"
+  >
+  </employees-list>
   <div class="c-dashboard__footer">
     <button class="c-button">
       Load More
