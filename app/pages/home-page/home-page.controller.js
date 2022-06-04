@@ -33,7 +33,7 @@ function homePageController(Employees, $scope, $location, $rootScope) {
         .then(({ data }) => {
           $rootScope.users = data.employees;
           $rootScope.loading = false;
-        })
+        });
     }, 50);
   }
 
