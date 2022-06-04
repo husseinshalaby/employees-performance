@@ -5,6 +5,7 @@ import PerformancePageComponent from './pages/performance-page.vue';
 import PerformanceChartComponent from './components/vue-components/performance-chart.vue';
 import SearchComponent from './components/vue-components/search.vue';
 import ButtonComponent from './components/vue-components/button.vue';
+import NotFoundPageComponent from './pages/not-found-page.vue';
 
 angular.module('appModule', [
   'ui.router',
@@ -26,4 +27,8 @@ angular.module('appModule').directive('searchComponent', (createVueComponent) =>
 
 angular.module('appModule').directive('buttonComponent', (createVueComponent) => {
   return createVueComponent(Vue.component('ButtonComponent', ButtonComponent));
+});
+
+angular.module('appModule').directive('vNotFoundPage', (createVueComponent) => {
+  return createVueComponent(Vue.component('NotFoundPageComponent', NotFoundPageComponent));
 });
